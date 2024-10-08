@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
 
+const db = require('./utils/database');
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -18,6 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
+
+db.execute('SELECT * FROM PRODUCTS').then(result => {
+    console.log(result);
+}).catch(err => {
+    console.log(err);
+});
 
 app.use(errorController.get404);
 
