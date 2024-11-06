@@ -19,7 +19,7 @@ router.post(
       .normalizeEmail(),
     body('password', 'Password has to be valid.')
       .isLength({ min: 5 })
-      // .isAlphanumeric()
+      .isAlphanumeric()
       .trim()
   ],
   authController.postLogin
